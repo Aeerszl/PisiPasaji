@@ -1,47 +1,66 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
+import { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
 import { PRODUCTS } from "../../products";
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
+import PaymentSuccessMessage from "./PaymentSuccessMessage";
 
 import "./cart.css";
 export const Cart = () => {
+  // ShopContext'ten gerekli fonksiyonları ve verileri al
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
+  // Sepetteki toplam tutarı al
   const totalAmount = getTotalCartAmount();
 
+  // React Router DOM kullanarak sayfa yönlendirme fonksiyonunu al
   const navigate = useNavigate();
+
+  // Ödeme başarılı mesajını göstermek için durum değişkeni
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+
+  const handleCheckout = () => {
+    // Sepeti boşaltma fonksiyonu çağırılıyor
+    checkout();
+    // Ödeme başarılı mesajını göstermek için durum değişkenini true yap
+    setPaymentSuccess(true);
+  };
 
   return (
     <div className="cart">
       <div>
-        <h1>Your Cart Items</h1>
+        <h1>Your Selection</h1> {/* Sepet başlığı */}
       </div>
-    <div className="cart">
+      <div className="cart">
+        {/* Ürünlerin listelendiği bölüm */}
         {PRODUCTS.map((product) => {
-            if (cartItems[product.id] !== 0) {
-                return <CartItem data={product} />;
-            }
-            return null; // Add a return statement here
+          // Ürünün sepete eklenip eklenmediğini kontrol et
+          if (cartItems[product.id] !== 0) {
+            // Eğer eklenmişse, CartItem bileşenini render et
+            return <CartItem data={product} />;
+          }
+          // Eğer eklenmemişse, null döndür (işlevsiz)
+          return null; // Buraya bir açıklama satırı ekle
         })}
-    </div>
+      </div>
 
-      {totalAmount > 0 ? (
-        <div className="checkout">
-          <p> Subtotal: ${totalAmount} </p>
-          <button onClick={() => navigate("/")}> Continue Shopping </button>
-          <button
-            onClick={() => {
-              checkout();
-              navigate("/checkout");
-            }}
-          >
-            {" "}
-            Checkout{" "}
-          </button>
-        </div>
-      ) : (
-        <h1> Your Shopping Cart is Empty</h1>
-      )}
+      {/* Sepetin dolu olup olmadığını kontrol et */}
+    {/* Sepetin dolu olup olmadığını kontrol et */}
+{totalAmount > 0 && !paymentSuccess ? (
+  // Eğer sepet doluysa ve ödeme başarılı değilse, ödeme ve devam etme butonlarını göster
+  <div className="checkout">
+    <p> Subtotal: ${totalAmount} </p> {/* Toplam tutar */}
+    <button onClick={() => navigate("/")}> Continue Shopping </button> {/* Alışverişe devam etme butonu */}
+    <button onClick={handleCheckout}> Checkout </button> {/* Ödeme butonu */}
+  </div>
+) : totalAmount === 0 && !paymentSuccess ? (
+  // Eğer sepet boşsa ve ödeme başarılı değilse, bu mesajı göster
+  <h1> Your Shopping Cart is Empty</h1>
+) : null}
+
+{/* Ödeme başarılı mesajını göstermek için bileşeni kontrol et */}
+{paymentSuccess && <PaymentSuccessMessage />}
+
     </div>
   );
 };
