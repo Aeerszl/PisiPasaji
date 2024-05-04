@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {CheckCircle } from "phosphor-react";
-
+import coolFunGif from '../../assets/cool-fun.gif';
 const PaymentSuccessMessage = () => {
   const navigate = useNavigate();
 
@@ -9,7 +9,7 @@ const PaymentSuccessMessage = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       navigate("/");
-    }, 9000);
+    }, 6000);
 
     // Temizleme fonksiyonunu geri dön
     return () => clearTimeout(timeout);
@@ -18,7 +18,7 @@ const PaymentSuccessMessage = () => {
   return (
     <div>
       <h1>Congratulations! Your payment was successful. <CheckCircle  color="green"  size={32} weight="fill" /> </h1>
-      {/* Ekstra bilgi veya yönlendirme bağlantıları ekleyebilirsiniz */}
+      <img src={coolFunGif} alt="Cool Fun Gif" className="gif-image" />
     </div>
   );
 };

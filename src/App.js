@@ -5,7 +5,7 @@ import { Shop } from "./pages/shop/shop";
 import { Contact } from "./pages/contact";
 import { Cart } from "./pages/cart/cart";
 import { ShopContextProvider } from "./context/shop-context";
-
+import Material from "./pages/material"; // Material bileşenini import edin
 function App() {
   return (
     <div className="App">
@@ -14,6 +14,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Shop />} />
+            <Route path="/material" element={<Material />} /> {/* Material bileşenini render et */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>

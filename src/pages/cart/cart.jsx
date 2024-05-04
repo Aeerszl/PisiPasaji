@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
-import { PRODUCTS } from "../../products";
+
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
 import PaymentSuccessMessage from "./PaymentSuccessMessage";
 
 import "./cart.css";
+import { Cats } from "../../data/cats";
+import { Cats_Item } from "../../data/cats-items";
 export const Cart = () => {
   // ShopContext'ten gerekli fonksiyonları ve verileri al
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
@@ -33,7 +35,7 @@ export const Cart = () => {
       </div>
       <div className="cart">
         {/* Ürünlerin listelendiği bölüm */}
-        {PRODUCTS.map((product) => {
+        {Cats.map((product) => {
           // Ürünün sepete eklenip eklenmediğini kontrol et
           if (cartItems[product.id] !== 0) {
             // Eğer eklenmişse, CartItem bileşenini render et
@@ -42,6 +44,7 @@ export const Cart = () => {
           // Eğer eklenmemişse, null döndür (işlevsiz)
           return null; // Buraya bir açıklama satırı ekle
         })}
+        
       </div>
 
       {/* Sepetin dolu olup olmadığını kontrol et */}

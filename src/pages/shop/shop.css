@@ -40,8 +40,8 @@
     background-color: transparent;
     border: 2px solid rgb(19, 19, 19);
     min-width: 100px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 15px;
@@ -51,4 +51,93 @@
     background-color: rgb(19, 19, 19);
     color: white;
     cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    .shopTitle {
+       margin-top: 2px;
+       text-align: center;
+       font-size: 16px;
+       color: coral;
+     }
+   
+    .products {
+       width: 100%;
+       display: grid;
+       grid-template-columns: 1fr 1fr;
+       place-items: center;
+       /* Remove fixed height and add overflow-y: auto to enable vertical scrolling if the content overflows */
+       height: auto;
+       overflow-y: auto;
+     }
+   
+    .product {
+       border-radius: 15px;
+       width: 150px;
+       margin: 15px;
+       display: flex;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       height: auto;
+       flex-grow: 1;
+     }
+   
+    .product img {
+       width: 75px;
+     }
+   
+    .addToCartBttn {
+       background-color: transparent;
+       border: 2px solid rgb(19, 19, 19);
+       min-width: 30px;
+       padding-left: 1px;
+       padding-right: 1px;
+       padding-top: 2px;
+       padding-bottom: 1px;
+       border-radius: 15px;
+       margin-bottom: 10px;
+     }
+   }
+   @media screen and (min-width: 769px) and (max-width: 1280px) {
+    .shopTitle {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 30px;
+      color: coral;
+    }
+    .products {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      place-items: center;
+      height: auto;
+    }
+  
+    .product {
+      border-radius: 15px;
+      width: 200px;
+      margin: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      flex-grow: 1;
+    }
+  
+    .product img {
+      width: 100px;
+    }
+  
+    .addToCartBttn {
+      background-color: transparent;
+      border: 2px solid rgb(19, 19, 19);
+      min-width: 30px;
+      padding-left: 1px;
+      padding-right: 1px;
+      padding-top: 2px;
+      padding-bottom: 1px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
   }
